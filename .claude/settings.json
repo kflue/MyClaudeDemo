@@ -1,12 +1,4 @@
 {
-  "enabledPlugins": {
-    "frontend-design@anthropic-plugin-directory": true,
-    "context7@anthropic-plugin-directory": true,
-    "feature-dev@anthropic-plugin-directory": true,
-    "claude-code-setup@anthropic-plugin-directory": true,
-    "sonarqube@anthropic-plugin-directory": true
-  },
-  "enabledMcpjsonServers": ["angular-cli", "playwright"],
   "permissions": {
     "allow": [
       "Bash(npm test:*)",
@@ -20,8 +12,15 @@
       "mcp__angular-cli__search_documentation",
       "mcp__angular-cli__list_projects"
     ],
-    "deny": ["Read(./.env)", "Read(./.env.*)"]
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)"
+    ]
   },
+  "enabledMcpjsonServers": [
+    "angular-cli",
+    "playwright"
+  ],
   "hooks": {
     "PreToolUse": [
       {
@@ -45,5 +44,12 @@
         ]
       }
     ]
+  },
+  "enabledPlugins": {
+    "frontend-design@anthropic-plugin-directory": true,
+    "context7@anthropic-plugin-directory": true,
+    "feature-dev@anthropic-plugin-directory": true,
+    "claude-code-setup@anthropic-plugin-directory": true,
+    "sonarqube@anthropic-plugin-directory": true
   }
 }
