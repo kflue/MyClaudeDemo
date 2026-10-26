@@ -1,0 +1,47 @@
+// Dev container for GitHub Codespaces (also works with the VS Code Dev Containers extension).
+// See https://containers.dev/implementors/json_reference/
+{
+  "name": "MyClaudeDemo (Angular)",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:24",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1": {}
+  },
+
+  // Keep Claude Code login and history across container rebuilds.
+  "mounts": ["source=claude-code-config-${devcontainerId},target=/home/node/.claude,type=volume"],
+
+  // Install dependencies and the Chromium build used by the Playwright MCP server.
+  "postCreateCommand": "sudo chown node:node /home/node/.claude && npm ci && npx -y -p @playwright/mcp@0.0.83 playwright install --with-deps chromium",
+
+  "forwardPorts": [4200],
+  "portsAttributes": {
+    "4200": { "label": "Angular dev server", "onAutoForward": "openBrowser" }
+  },
+
+  "secrets": {
+    "ANTHROPIC_API_KEY": {
+      "description": "Optional. Only needed if you use Claude Code with an API key instead of logging in with a Claude account."
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "angular.ng-template",
+        "esbenp.prettier-vscode",
+        "vitest.explorer",
+        "anthropic.claude-code"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+      }
+    },
+    "codespaces": {
+      "openFiles": ["README.md"]
+    }
+  },
+
+  "remoteUser": "node"
+}

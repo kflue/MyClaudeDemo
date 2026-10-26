@@ -1,0 +1,49 @@
+{
+  "enabledPlugins": {
+    "frontend-design@anthropic-plugin-directory": true,
+    "context7@anthropic-plugin-directory": true,
+    "feature-dev@anthropic-plugin-directory": true,
+    "claude-code-setup@anthropic-plugin-directory": true,
+    "sonarqube@anthropic-plugin-directory": true
+  },
+  "enabledMcpjsonServers": ["angular-cli", "playwright"],
+  "permissions": {
+    "allow": [
+      "Bash(npm test:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run format:*)",
+      "Bash(npx ng generate:*)",
+      "Bash(npx ng build:*)",
+      "Bash(npx ng test:*)",
+      "Bash(npx prettier:*)",
+      "mcp__angular-cli__get_best_practices",
+      "mcp__angular-cli__search_documentation",
+      "mcp__angular-cli__list_projects"
+    ],
+    "deny": ["Read(./.env)", "Read(./.env.*)"]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/protect-files.mjs"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/format.mjs"
+          }
+        ]
+      }
+    ]
+  }
+}
