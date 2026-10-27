@@ -1,0 +1,14 @@
+<app-chat-sidebar id="chat-sidebar" class="sidebar" (navigated)="sidebarOpen.set(false)" />
+
+@if (sidebarOpen()) {
+  <div class="backdrop" aria-hidden="true" (click)="sidebarOpen.set(false)"></div>
+}
+
+<main class="main">
+  <app-chat-header
+    [sidebarOpen]="sidebarOpen()"
+    (toggleSidebar)="sidebarOpen.update((open) => !open)"
+  />
+  <app-chat-message-list class="messages" />
+  <app-chat-input />
+</main>

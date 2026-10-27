@@ -1,0 +1,67 @@
+:host {
+  display: block;
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 0 1rem 0.75rem;
+}
+
+.composer {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.06);
+
+  &:focus-within {
+    border-color: var(--color-text-muted);
+  }
+}
+
+textarea {
+  flex: 1;
+  min-height: 2.25rem;
+  max-height: 12rem;
+  padding: 0.375rem 0;
+  border: 0;
+  background: transparent;
+  resize: none;
+  field-sizing: content;
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: var(--color-text-muted);
+  }
+}
+
+.send {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  cursor: pointer;
+
+  &:disabled {
+    background: var(--color-border);
+    color: var(--color-text-muted);
+    cursor: not-allowed;
+  }
+}
+
+.hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}

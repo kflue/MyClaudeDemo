@@ -1,0 +1,24 @@
+<form class="composer" (submit)="submit($event)">
+  <label class="visually-hidden" for="chat-prompt">Message</label>
+  <textarea
+    id="chat-prompt"
+    rows="1"
+    placeholder="Send a message"
+    [formField]="chatForm.prompt"
+    (keydown)="onKeydown($event)"
+  ></textarea>
+  <button type="submit" class="send" [disabled]="!canSend()">
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+      <path
+        d="M12 19V5M5 12l7-7 7 7"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+    <span class="visually-hidden">Send message</span>
+  </button>
+</form>
+<p class="hint">Responses are mocked — no real model is called.</p>
