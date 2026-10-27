@@ -1,0 +1,40 @@
+@if (store.messages().length) {
+  <div class="messages" role="log" aria-label="Conversation">
+    @for (message of store.messages(); track message.id) {
+      @if (message.role === 'user') {
+        <div class="message user">
+          <span class="visually-hidden">You said:</span>
+          <p class="bubble">{{ message.content }}</p>
+        </div>
+      } @else {
+        <div class="message assistant">
+          <div class="avatar" aria-hidden="true">AI</div>
+          <div class="body">
+            <div class="model-name">{{ message.model }}</div>
+            @if (message.content) {
+              <p class="content">{{ message.content }}</p>
+            } @else {
+              <div class="typing" role="status">
+                <span class="visually-hidden">Assistant is thinking…</span>
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    }
+  </div>
+} @else {
+  <div class="empty-state">
+    <h1>How can I help you today?</h1>
+    <ul class="suggestions" aria-label="Suggested prompts">
+      @for (suggestion of suggestions; track suggestion) {
+        <li>
+          <button type="button" class="suggestion" (click)="store.send(suggestion)">
+            {{ suggestion }}
+          </button>
+        </li>
+      }
+    </ul>
+  </div>
+}

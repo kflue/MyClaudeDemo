@@ -1,0 +1,32 @@
+<div class="brand">MyClaudeDemo</div>
+
+<button type="button" class="new-chat" [disabled]="store.isResponding()" (click)="newChat()">
+  <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+    <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+  </svg>
+  New chat
+</button>
+
+<nav aria-labelledby="chats-heading">
+  <h2 id="chats-heading" class="section-title">Chats</h2>
+  @if (store.conversations().length) {
+    <ul>
+      @for (conversation of store.conversations(); track conversation.id) {
+        <li>
+          <button
+            type="button"
+            class="chat-link"
+            [class.active]="conversation.id === store.activeId()"
+            [attr.aria-current]="conversation.id === store.activeId() ? 'page' : null"
+            [disabled]="store.isResponding()"
+            (click)="select(conversation.id)"
+          >
+            {{ conversation.title }}
+          </button>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="empty">No chats yet</p>
+  }
+</nav>
